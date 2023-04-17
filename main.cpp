@@ -100,7 +100,7 @@ void programB_FunB1(void (*callback1)()) {
 }
 
 union token{//union好处是比较节省空间
-    //默认都是公有的,同一时刻只能有一个值
+    //默认都是公有的,同一时刻只能有一个值,完成推送
     int age10;
     double age20;
 
