@@ -30,7 +30,7 @@ public:
 
     string* str;
 
-    virtual void print(){
+    virtual void print(){//函数如果声明为virtual，则在运行的时候会判断类型，否则在编译时就被判断类型
         cout<<"person print"<<endl;
     }
     void work(){
@@ -43,7 +43,7 @@ public:
         this->str=str;
 
     }
-    person(person& p){
+    person(person& p){//深拷贝，其实就是传一个引用进去
         this->str = new string(*(p.str));
         cout<<"deep copy"<<endl;
         cout<<*this->str<<endl;
@@ -190,8 +190,8 @@ void test6(string&& string){
      friend class rr;
 
 
-     void print3()=delete;
-     cc()=default;
+     void print3()=delete;//加delete，说明该函数不能被使用
+     cc()=default;//默认的构造函数
      cc(int a){
          cout<<a<<endl;
      }
@@ -270,7 +270,7 @@ public :
      retrangle operator-(retrangle& ret1){
 
         retrangle retrangle2;
-        retrangle2.length=this->length-ret1.length;
+        retrangle2.length=retrangle2.length-ret1.length;
         retrangle2.width=this->width-ret1.width;
          return retrangle2;
 
@@ -474,11 +474,79 @@ enum color1{
 };
 
 
+#include<stack>
+
+
+template<class T>
+void testtem(T t){
+    stack<T> stack1;
+    stack1.push(t);
+    cout<<stack1.top()<<endl;
+
+
+}
+
+
+
+class fileguard{
+    public:
+        fileguard(){
+
+
+        }
+        ~fileguard(){
+            if(file.is_open()){
+                file.close();
+            }
+            cout<<"文件已经关闭"<<endl;
+
+
+
+        }
+
+    private:
+        ofstream file;
+
+    };
+
+
+
+
+
 
 
 
 
 int main(int argc, char **argv) {
+
+
+
+
+
+
+
+
+
+
+
+
+    thread lamadathread([](int num){
+        cout<<"通过lamada表达式创建进程："<<num<<endl;
+    },100);
+    lamadathread.join();
+
+
+
+
+
+
+
+
+    testtem(1);
+    testtem("hh");
+
+
+
     color1 color9=color1::blue;
     cout<<color9<<endl;
 
@@ -928,7 +996,7 @@ int main(int argc, char **argv) {
 
 
     int* intptr= nullptr;
-    intptr=new int[2]{2,5};
+    intptr=new int[2]{2,5};//new是用一个指针来接收的，指向连续几个变量
     cout<<*(intptr+1)<<endl;
     delete intptr;
     cout<<*intptr<<endl;
@@ -982,18 +1050,18 @@ int main(int argc, char **argv) {
     v1.reserve(100);
     cout<<v1.capacity()<<endl;
     v1.resize(200);
-    cout<<v1.capacity()<<endl;
+    cout<<v1.capacity()<<endl;//size即为实际的元素个数
 
 
 
 
-     int num2=20;
+     const int num2=20;
     int &&a2 =30;//右值引用
-    const int& c1=num2;
+     const int& c1=num2;//num2为const，则该引用必须为const
     const int& c3=100;
     cout<<c1<<endl;
-    a2=move(num2);
-    cout<<a2<<endl;
+    a2=move(c1);//move可以将左值引用，转换为右值引用
+    cout<<"move的使用"<<a2<<endl;
 
     a2=11;
     cout<<a2<<endl;
