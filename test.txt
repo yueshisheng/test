@@ -5,3 +5,5 @@ c++基础知识学习记录
 面向对象等
 网络编程
 vim大全
+计算机书籍大全：
+https://github.com/justjavac/free-programming-books-zh_CN#cc
