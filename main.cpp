@@ -524,12 +524,6 @@ int main(int argc, char **argv) {
 
 
 
-
-
-
-
-
-
     thread lamadathread([](int num){
         cout<<"通过lamada表达式创建进程："<<num<<endl;
     },100);
